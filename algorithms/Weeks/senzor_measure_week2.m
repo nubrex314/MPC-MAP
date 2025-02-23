@@ -40,7 +40,7 @@ else
     Lidar_cov=cov(dataset.dataset(1:end,3:10))
     sqrt_std=sigma.^2
     %task 4
-    x = -2.5:0.01:2.5;
+    x = -1.5:0.01:1.5;
     gnss_pdf=norm_pdf(x,0,sigma(1));
     Lidar_pdf=norm_pdf(x,0,sigma(3));
     figure(4)
@@ -51,6 +51,7 @@ else
     title('Noise Characteristics of Robot Sensors');
     xlabel('x');
     ylabel('Probability Density');
+    legend('GNSS','Lidar');
 
     error("konec mereni")
 end
