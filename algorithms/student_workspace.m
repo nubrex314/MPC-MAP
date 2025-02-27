@@ -2,7 +2,7 @@ function [public_vars] = student_workspace(read_only_vars,public_vars)
 %STUDENT_WORKSPACE Summary of this function goes here
 %% Week 2
 %Task 2
-public_vars = senzor_measure_week2(read_only_vars, public_vars);
+%public_vars = senzor_measure_week2(read_only_vars, public_vars);
 %%
 % 8. Perform initialization procedure
 if (read_only_vars.counter == 1)
