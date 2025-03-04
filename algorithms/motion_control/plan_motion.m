@@ -1,27 +1,27 @@
 function [public_vars] = plan_motion(read_only_vars, public_vars)
 %PLAN_MOTION Summary of this function goes here
+XR=read_only_vars.mocap_pose(1);
+YR=read_only_vars.mocap_pose(2);
+thetaR=read_only_vars.mocap_pose(3);
+epsilon=0.2;
+k=1;
+%% I. Pick navigation target
 
-% I. Pick navigation target
+%target = get_target(public_vars.estimated_pose, public_vars.path);
+distance = norm(read_only_vars.mocap_pose(1:2)-public_vars.path(1,:));
+if distance < 0.4
+    public_vars.path(1, :) = [];
+end
+target = public_vars.path(1,:);
+%% II. Compute motion vector
 
-target = get_target(public_vars.estimated_pose, public_vars.path);
-
-
-% II. Compute motion vector
-
-public_vars.motion_vector = [0, 0];
-count=read_only_vars.counter;
-% switch count
-%     case num2cell(1:50)
-%     public_vars.motion_vector = [1, 1];
-%     case num2cell(51:110)
-%     public_vars.motion_vector = [0.9 , 1];
-%     case num2cell(111:139)
-%     public_vars.motion_vector = [1, 1];
-%     case num2cell(140:195)
-%     public_vars.motion_vector = [1 , 0.9];
-%     case num2cell(196:300)
-%     public_vars.motion_vector = [1, 1];
-% end
-
-
+%public_vars.motion_vector = [0, 0];
+xp=XR+epsilon*cos(thetaR);
+yp=YR+epsilon*sin(thetaR);
+dxp=k*(target(1)-xp);
+dyp=k*(target(2)-yp);
+%v=dxp*cos(thetaR)+dyp*sin(thetaR);
+v=1;
+u=(1/epsilon)*(-dxp*sin(thetaR)+dyp*cos(thetaR));
+public_vars.motion_vector =kinematics(v,u);
 end

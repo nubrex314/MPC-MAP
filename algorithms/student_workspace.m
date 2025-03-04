@@ -22,8 +22,9 @@ public_vars.particles = update_particle_filter(read_only_vars, public_vars);
 public_vars.estimated_pose = estimate_pose(public_vars); % (x,y,theta)
 
 % 12. Path planning
+if read_only_vars.counter<2
 public_vars.path = plan_path(read_only_vars, public_vars);
-
+end
 % 13. Plan next motion command
 public_vars = plan_motion(read_only_vars, public_vars);
 
