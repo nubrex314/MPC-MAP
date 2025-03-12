@@ -26,8 +26,8 @@ xp=XR+epsilon*cos(thetaR);
 yp=YR+epsilon*sin(thetaR);
 dxp=k*(target(1)-xp);
 dyp=k*(target(2)-yp);
-v=dxp*cos(thetaR)+dyp*sin(thetaR);
-%v=1;
+%v=dxp*cos(thetaR)+dyp*sin(thetaR);
+v=0.7;
 u=(1/epsilon)*(-dxp*sin(thetaR)+dyp*cos(thetaR));
 public_vars.motion_vector =kinematics(v,u);
 end
