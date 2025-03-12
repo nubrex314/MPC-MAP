@@ -8,11 +8,17 @@ k=1;
 %% I. Pick navigation target
 
 %target = get_target(public_vars.estimated_pose, public_vars.path);
-distance = norm(read_only_vars.mocap_pose(1:2)-public_vars.path(1,:));
-if distance < 0.4
-    public_vars.path(1, :) = [];
-end
-target = public_vars.path(1,:);
+    if isempty(public_vars.path)
+    disp('NO TRACK.');
+    target=[XR,YR];
+    else
+    distance = norm(read_only_vars.mocap_pose(1:2)-public_vars.path(1,:));
+        if distance < 0.4
+            public_vars.path(1, :) = [];
+        end
+    target = public_vars.path(1,:);
+    end
+
 %% II. Compute motion vector
 
 %public_vars.motion_vector = [0, 0];
@@ -20,8 +26,8 @@ xp=XR+epsilon*cos(thetaR);
 yp=YR+epsilon*sin(thetaR);
 dxp=k*(target(1)-xp);
 dyp=k*(target(2)-yp);
-%v=dxp*cos(thetaR)+dyp*sin(thetaR);
-v=1;
+v=dxp*cos(thetaR)+dyp*sin(thetaR);
+%v=1;
 u=(1/epsilon)*(-dxp*sin(thetaR)+dyp*cos(thetaR));
 public_vars.motion_vector =kinematics(v,u);
 end
