@@ -12,7 +12,7 @@ k=1;
     disp('NO TRACK.');
     target=[XR,YR];
     else
-    distance = norm(read_only_vars.mocap_pose(1:2)-public_vars.path(1,:));
+    distance = norm([XR,YR]-public_vars.path(1,:));
         if distance < 0.4
             public_vars.path(1, :) = [];
         end

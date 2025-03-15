@@ -10,7 +10,8 @@ if planning_required
     path = smooth_path(path);
     
 else
-    path = indor_1_path;
+    %path = indor_1_path;
+    path = outdor_1_path;
     
 end
 

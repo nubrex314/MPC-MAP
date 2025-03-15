@@ -1,6 +1,6 @@
 function [particles] = update_particle_filter(read_only_vars, public_vars)
 %UPDATE_PARTICLE_FILTER Summary of this function goes here
-
+if ~isempty(read_only_vars.map.gnss_denied)
 particles = public_vars.particles;
 
 % I. Prediction
@@ -23,6 +23,8 @@ percen=0.9;
 for i=m*percen:m
     [~,particles(i,:)] = init_particle_filter(read_only_vars, public_vars, 1);
 end
-
+else
+    particles=public_vars.particles;
+end
 end
 
