@@ -11,7 +11,8 @@ if planning_required
     
 else
     %path = indor_1_path;
-    path = outdor_1_path;
+   % path = outdor_1_path;
+    path = outdor_1_path_v2;
     
 end
 

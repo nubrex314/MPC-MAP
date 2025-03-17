@@ -1,9 +1,9 @@
 function [public_vars] = plan_motion(read_only_vars, public_vars)
 %PLAN_MOTION Summary of this function goes here
-XR=read_only_vars.mocap_pose(1);
-YR=read_only_vars.mocap_pose(2);
-thetaR=read_only_vars.mocap_pose(3);
-epsilon=0.2;
+XR=public_vars.mu(1);
+YR=public_vars.mu(2);
+thetaR=public_vars.mu(3);
+epsilon=0.3;
 k=1;
 %% I. Pick navigation target
 
@@ -13,7 +13,7 @@ k=1;
     target=[XR,YR];
     else
     distance = norm([XR,YR]-public_vars.path(1,:));
-        if distance < 0.4
+        if distance < 0.5
             public_vars.path(1, :) = [];
         end
     target = public_vars.path(1,:);
@@ -26,8 +26,8 @@ xp=XR+epsilon*cos(thetaR);
 yp=YR+epsilon*sin(thetaR);
 dxp=k*(target(1)-xp);
 dyp=k*(target(2)-yp);
-%v=dxp*cos(thetaR)+dyp*sin(thetaR);
-v=0.7;
+v=dxp*cos(thetaR)+dyp*sin(thetaR);
+%v=0.7;
 u=(1/epsilon)*(-dxp*sin(thetaR)+dyp*cos(thetaR));
 public_vars.motion_vector =kinematics(v,u);
 end
