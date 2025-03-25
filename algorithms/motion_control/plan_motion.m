@@ -14,7 +14,9 @@ k=1;
     else
     distance = norm([XR,YR]-public_vars.path(1,:));
         if distance < 0.5
+            if(size(public_vars.path,1)~=1)
             public_vars.path(1, :) = [];
+            end
         end
     target = public_vars.path(1,:);
     end
