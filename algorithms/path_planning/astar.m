@@ -2,7 +2,7 @@ function [path] = astar(read_only_vars, public_vars)
     map=read_only_vars.discrete_map.map;
     [rows, cols] = size(map);
 
-    map=Dilating_obstacles(map, 0.5,read_only_vars);
+    map=Dilating_obstacles(map, 0.6,read_only_vars);
 
     goal_pos=[read_only_vars.discrete_map.goal(2),read_only_vars.discrete_map.goal(1)];
 

@@ -1,8 +1,8 @@
 function [public_vars] = plan_motion(read_only_vars, public_vars)
 %PLAN_MOTION Summary of this function goes here
-XR=public_vars.mu(1);
-YR=public_vars.mu(2);
-thetaR=public_vars.mu(3);
+XR=public_vars.estimated_pose(1);
+YR=public_vars.estimated_pose(2);
+thetaR=public_vars.estimated_pose(3);
 epsilon=0.3;
 k=1;
 %% I. Pick navigation target
