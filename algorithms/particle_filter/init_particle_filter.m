@@ -9,26 +9,15 @@ if ~isempty(read_only_vars.map.gnss_denied)
     else
         if public_vars.kidnapped==0
             for i =1:n
-                particle(i,:)=randomPose(public_vars.estimated_pose(1),public_vars.estimated_pose(2),0.5);
+                particle(i,:)=randomPose(public_vars.estimated_pose(1),public_vars.estimated_pose(2),public_vars.outin_count/20+0.5);
+                %particle(i,:)=randomPose(public_vars.estimated_pose(1),public_vars.estimated_pose(2),0.5);
             end
+            public_vars.particles =particle;
         else
         particle = [read_only_vars.map.gnss_denied(1) + (read_only_vars.map.gnss_denied(3) - read_only_vars.map.gnss_denied(1)) *rand(n,1), ...   
                      read_only_vars.map.gnss_denied(2) + (read_only_vars.map.gnss_denied(6) - read_only_vars.map.gnss_denied(2)) *rand(n,1), ...   
                      2*pi*rand(n,1)];  
-        end
-        for i =1:n
-            if particle(i,1)< read_only_vars.map.limits(1)|| particle(i,1)> read_only_vars.map.limits(3)
-                particle(i,:)=[read_only_vars.map.gnss_denied(1) + (read_only_vars.map.gnss_denied(3) - read_only_vars.map.gnss_denied(1)) *rand, ...   
-                     read_only_vars.map.gnss_denied(2) + (read_only_vars.map.gnss_denied(6) - read_only_vars.map.gnss_denied(2)) *rand, ...   
-                     2*pi*rand];
-                i=i-1;
-            end
-            if particle(i,2)< read_only_vars.map.limits(2)|| particle(i,2)> read_only_vars.map.limits(4)
-                particle(i,:)=[read_only_vars.map.gnss_denied(1) + (read_only_vars.map.gnss_denied(3) - read_only_vars.map.gnss_denied(1)) *rand, ...   
-                     read_only_vars.map.gnss_denied(2) + (read_only_vars.map.gnss_denied(6) - read_only_vars.map.gnss_denied(2)) *rand, ...   
-                     2*pi*rand];
-                i=i-1;
-            end
+         public_vars.particles =particle;
         end
     end
 else

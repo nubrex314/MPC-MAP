@@ -16,6 +16,8 @@ k=1;
         if distance < 0.5
             if(size(public_vars.path,1)~=1)
             public_vars.path(1, :) = [];
+            else
+            public_vars.lost=1;
             end
         end
     target = public_vars.path(1,:);
@@ -36,7 +38,7 @@ if public_vars.lost==1
     public_vars.motion_vector =kinematics(0.5,0);
 end
 lidar=read_only_vars.lidar_distances;
-if lidar(1)<0.5 || lidar(2)<0.5 || lidar(8)<0.5
+if lidar(1)<0.2 || lidar(2)<0.2 || lidar(8)<0.2
     public_vars.motion_vector=[-public_vars.motion_vector(1),public_vars.motion_vector(2)];
 elseif lidar(3)<0.2 || lidar(4)<0.2
     public_vars.motion_vector=[public_vars.motion_vector(1),public_vars.motion_vector(2)/2];

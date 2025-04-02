@@ -9,8 +9,8 @@ if planning_required
     if isempty(path)
         return
     end
-    path = [path(:,2) ./ read_only_vars.discrete_map.dims(2).*read_only_vars.map.limits(4)...
-            path(:,1) ./ read_only_vars.discrete_map.dims(1).*read_only_vars.map.limits(3)-0.2];
+    path = [path(:,2) .* read_only_vars.map.discretization_step-0.2...
+            path(:,1) .* read_only_vars.map.discretization_step-0.3];
 
     path = smooth_path(path);
 else

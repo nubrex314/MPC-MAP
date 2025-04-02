@@ -7,7 +7,7 @@ function [path] = astar(read_only_vars, public_vars)
     goal_pos=[read_only_vars.discrete_map.goal(2),read_only_vars.discrete_map.goal(1)];
 
     %[rows, cols] = size(map);
-    start_pos=[round(rows/read_only_vars.map.limits(3)*public_vars.estimated_pose(1)),round(cols/read_only_vars.map.limits(4)*public_vars.estimated_pose(2))]; 
+    start_pos=[round(public_vars.estimated_pose(2)/read_only_vars.map.discretization_step),round(public_vars.estimated_pose(1)/read_only_vars.map.discretization_step)]; 
     if start_pos(1)<2
         start_pos(1)=2;
     elseif start_pos(2)<2
