@@ -8,6 +8,11 @@ function [path] = astar(read_only_vars, public_vars)
 
     %[rows, cols] = size(map);
     start_pos=[round(rows/read_only_vars.map.limits(3)*public_vars.estimated_pose(1)),round(cols/read_only_vars.map.limits(4)*public_vars.estimated_pose(2))]; 
+    if start_pos(1)<2
+        start_pos(1)=2;
+    elseif start_pos(2)<2
+        start_pos(2)=2;
+    end
     %start_pos=[2,2];
     moves = [0 1; 1 0; 0 -1; -1 0];
     open_list = [];

@@ -11,9 +11,10 @@ function [new_pose] = predict_pose(old_pose, motion_vector, read_only_vars)
     y_new = old_pose(2) + v*sin(old_pose(3))* d_t;
     theta_new = old_pose(3) + w*d_t;
      if nargin==3
-    x_new = x_new+((randn(1)-0.5)/10);
-    y_new = y_new+((randn(1)-0.5)/10);
-    theta_new = theta_new + ((randn(1)-0.5)/10);
+         std=50;
+    x_new = x_new+((randn(1)-0.5)/std);
+    y_new = y_new+((randn(1)-0.5)/std);
+    theta_new = theta_new + ((randn(1)-0.5)/std);
      end
     new_pose = [x_new, y_new, theta_new];
 end

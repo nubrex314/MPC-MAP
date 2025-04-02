@@ -32,4 +32,17 @@ v=dxp*cos(thetaR)+dyp*sin(thetaR);
 %v=0.7;
 u=(1/epsilon)*(-dxp*sin(thetaR)+dyp*cos(thetaR));
 public_vars.motion_vector =kinematics(v,u);
+if public_vars.lost==1 
+    public_vars.motion_vector =kinematics(0.5,0);
+end
+lidar=read_only_vars.lidar_distances;
+if lidar(1)<0.5 || lidar(2)<0.5 || lidar(8)<0.5
+    public_vars.motion_vector=[-public_vars.motion_vector(1),public_vars.motion_vector(2)];
+elseif lidar(3)<0.2 || lidar(4)<0.2
+    public_vars.motion_vector=[public_vars.motion_vector(1),public_vars.motion_vector(2)/2];
+elseif lidar(6)<0.2 || lidar(7)<0.2
+    public_vars.motion_vector=[public_vars.motion_vector(1)/2,public_vars.motion_vector(2)];
+elseif lidar(5)<0.2 || lidar(4)<0.2 || lidar(6)<0.2
+    public_vars.motion_vector=[abs(public_vars.motion_vector(1)),abs(public_vars.motion_vector(2))];
+end
 end

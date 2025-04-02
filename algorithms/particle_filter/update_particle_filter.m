@@ -17,9 +17,5 @@ weights = weight_particles(measurements, read_only_vars.lidar_distances);
 particles = resample_particles(particles, weights);
 
 m=length(particles);
-percen=0.9;
-for i=m*percen:m
-    [~,particles(i,:)] = init_particle_filter(read_only_vars, public_vars, 1);
-end
-end
+[~,particles(m*public_vars.resablicng_per+1:m,:)] = init_particle_filter(read_only_vars, public_vars, m-m*public_vars.resablicng_per);
 
