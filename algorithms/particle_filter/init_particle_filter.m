@@ -9,7 +9,7 @@ if ~isempty(read_only_vars.map.gnss_denied)
     else
         if public_vars.kidnapped==0
             for i =1:n
-                particle(i,:)=randomPose(public_vars.estimated_pose(1),public_vars.estimated_pose(2),public_vars.outin_count/20+0.5);
+                particle(i,:)=randomPose(public_vars.estimated_pose(1),public_vars.estimated_pose(2),public_vars.outin_count/150+0.5);
                 %particle(i,:)=randomPose(public_vars.estimated_pose(1),public_vars.estimated_pose(2),0.5);
             end
             public_vars.particles =particle;

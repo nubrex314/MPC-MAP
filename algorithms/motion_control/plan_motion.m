@@ -38,13 +38,14 @@ if public_vars.lost==1
     public_vars.motion_vector =kinematics(0.5,0);
 end
 lidar=read_only_vars.lidar_distances;
-if lidar(1)<0.2 || lidar(2)<0.2 || lidar(8)<0.2
+wall_distance=0.2;
+if lidar(1)<wall_distance || lidar(2)<wall_distance || lidar(8)<wall_distance
     public_vars.motion_vector=[-public_vars.motion_vector(1),public_vars.motion_vector(2)];
-elseif lidar(3)<0.2 || lidar(4)<0.2
+elseif lidar(3)<wall_distance || lidar(4)<wall_distance
     public_vars.motion_vector=[public_vars.motion_vector(1),public_vars.motion_vector(2)/2];
-elseif lidar(6)<0.2 || lidar(7)<0.2
+elseif lidar(6)<wall_distance || lidar(7)<wall_distance
     public_vars.motion_vector=[public_vars.motion_vector(1)/2,public_vars.motion_vector(2)];
-elseif lidar(5)<0.2 || lidar(4)<0.2 || lidar(6)<0.2
+elseif lidar(5)<wall_distance %|| lidar(4)<wall_distance|| lidar(6)<wall_distance
     public_vars.motion_vector=[abs(public_vars.motion_vector(1)),abs(public_vars.motion_vector(2))];
 end
 end
