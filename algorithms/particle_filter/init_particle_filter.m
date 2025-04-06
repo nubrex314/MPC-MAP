@@ -1,6 +1,5 @@
 function [public_vars,particle] = init_particle_filter(read_only_vars, public_vars,n)
 %INIT_PARTICLE_FILTER Summary of this function goes here
-if ~isempty(read_only_vars.map.gnss_denied)
     if nargin < 3
         n=1000;
         public_vars.particles = [read_only_vars.map.gnss_denied(1) + (read_only_vars.map.gnss_denied(3) - read_only_vars.map.gnss_denied(1)) *rand(n,1), ...   
@@ -20,10 +19,7 @@ if ~isempty(read_only_vars.map.gnss_denied)
          public_vars.particles =particle;
         end
     end
-else
-    public_vars.particles = [];
-end
-
+    
 end
 
 function [particle] = randomPose(X0, Y0, d_max)

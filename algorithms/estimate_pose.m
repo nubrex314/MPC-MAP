@@ -12,4 +12,5 @@ elseif public_vars.pf_enabled
 else
     estimated_pose = nan(1,3);
 end
+
 end

@@ -4,11 +4,11 @@ XR=public_vars.estimated_pose(1);
 YR=public_vars.estimated_pose(2);
 thetaR=public_vars.estimated_pose(3);
 epsilon=0.3;
-if read_only_vars.counter>100
+% if read_only_vars.counter>100
 k=1.8; 
-else
-  k=1; 
-end
+% else
+%   k=1; 
+% end
 %% I. Pick navigation target
 
 %target = get_target(public_vars.estimated_pose, public_vars.path);

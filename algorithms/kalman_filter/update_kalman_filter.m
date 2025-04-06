@@ -1,10 +1,5 @@
 function [mu, sigma] = update_kalman_filter(read_only_vars, public_vars)
 %UPDATE_KALMAN_FILTER Summary of this function goes here
-if read_only_vars.counter<10
-  public_vars.mu = [mean(read_only_vars.gnss_history(:,1)) mean(read_only_vars.gnss_history(:,2)) public_vars.mu(3)];
-else
-   public_vars.kf.R= diag([0.0005  0.0005  0.00005]);
-end
 mu = public_vars.mu;
 sigma = public_vars.sigma;
 
