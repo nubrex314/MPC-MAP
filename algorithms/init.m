@@ -24,16 +24,20 @@ function [public_vars] = init(public_vars,read_only_vars)
         public_vars.estimated_pose = estimate_pose(public_vars); 
         public_vars = init_particle_filter(read_only_vars, public_vars,1000);
         public_vars.particles = update_particle_filter(read_only_vars, public_vars);
-        public_vars.estimated_pose = [public_vars.mu(1),public_vars.mu(2),median(public_vars.particles(1:1000*public_vars.resablicng_per,3))];
+        public_vars.estimated_pose = [mean(read_only_vars.gnss_history(:,1)) mean(read_only_vars.gnss_history(:,2)) median(public_vars.particles(1:1000*public_vars.resablicng_per,3))];
         public_vars.mu=public_vars.estimated_pose;
     else
+        
+        if public_vars.pf_enabled==0
+            public_vars = init_particle_filter(read_only_vars, public_vars); 
+        end
         public_vars.estimated_pose = estimate_pose(public_vars); % (x,y,theta)
         public_vars.pf_enabled=1;
-        public_vars = init_particle_filter(read_only_vars, public_vars);
+
         public_vars.kidnapped=1;
         public_vars.particles = update_particle_filter(read_only_vars, public_vars);
         public_vars.outin_count=1;
-        public_vars.motion_vector=[0.2,-0.2];
+        public_vars.motion_vector=[0.1,-0.1];
         return;
     end
 end
