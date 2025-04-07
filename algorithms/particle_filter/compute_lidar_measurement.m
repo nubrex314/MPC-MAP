@@ -7,6 +7,10 @@ for i = 1:length(measurement)
 
         dis = sqrt((intersections(:,1) - pose(1)).^2 + (intersections(:,2) - pose(2)).^2);
         distance = min(dis);
+        if isempty(distance)
+             measurement(i)=NaN;
+             continue;
+        end
         measurement(i) = distance;
 end
 end
